@@ -1,0 +1,32 @@
+{
+  "name": "procivam/pagination",
+  "description": "Advanced paginator on php",
+  "keywords": [
+    "paginator", "php"
+  ],
+  "homepage": "https://github.com/procivam/pagination",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Protsiv Andrey",
+      "email": "procivam@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php" : ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit" : "4.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Procivam\\Pagination\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Procivam\\Pagination\\Test\\": "tests"
+    }
+  }
+}
