@@ -17,7 +17,7 @@
     "php" : ">=5.4.0"
   },
   "require-dev": {
-    "phpunit/phpunit" : "4.*"
+    "phpunit/phpunit": "5.*"
   },
   "autoload": {
     "psr-4": {
@@ -28,5 +28,8 @@
     "psr-4": {
       "Procivam\\Pagination\\Test\\": "tests"
     }
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }

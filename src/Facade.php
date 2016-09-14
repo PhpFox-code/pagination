@@ -1,9 +1,7 @@
 <?php
 namespace Procivam\Pagination;
 
-use Procivam\Pagination\System\Interfaces\FacadeInterface;
-
-class Facade implements FacadeInterface
+class Facade
 {
     /**
      * Configure Pagination parameters
