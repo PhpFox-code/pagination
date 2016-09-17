@@ -17,6 +17,8 @@ class Setting
         'count-links'            => 4,
         'use-human-friendly-url' => true,
         'user-friendly-pattern'  => '/page/<page>',
+        'absolute-links'         => true,
+        'view-file'              => '',
     ];
 
     /**
@@ -26,6 +28,9 @@ class Setting
      */
     public function __construct(array $settings = [])
     {
+        // Init view file
+        $this->setProperty('view-file', dirname(__FILE__) . '/../Public/Views/BootstrapNavigationBar');
+
         // Set new parameters
         foreach ($settings as $name => $value) {
             $this->setProperty($name, $value);
@@ -36,11 +41,13 @@ class Setting
      * @param string $name
      * @param mixed $value
      * @throws \InvalidArgumentException
-     * @return boolean
+     * @return Setting
      */
     public function __set($name, $value)
     {
-        return $this->setProperty($this->convertCallPropertyName($name), $value);
+        $this->setProperty($this->convertCallPropertyName($name), $value);
+
+        return $this;
     }
 
     /**
@@ -72,6 +79,19 @@ class Setting
         } else {
             throw new BadMethodCallException(sprintf('Attempt to call a nonexistent method: %s', $name));
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function extractForView()
+    {
+        $extracts = [];
+        foreach ($this->settings as $name => $value) {
+            $extracts[$this->convertArrayToVariables($name)] = $value;
+        }
+
+        return $extracts;
     }
 
     /**
@@ -115,5 +135,18 @@ class Setting
         }, $propertyName);
 
         return ltrim($convertedProperty, '-');
+    }
+
+    /**
+     * @param $propertyName
+     * @return mixed
+     */
+    protected function convertArrayToVariables($propertyName)
+    {
+        $convertedProperty = preg_replace_callback('#\-(.)#', function ($letters) {
+            return strtoupper($letters[1]);
+        }, $propertyName);
+
+        return $convertedProperty;
     }
 }

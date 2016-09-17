@@ -48,4 +48,14 @@ class SettingTest extends \PHPUnit_Framework_TestCase
         $this->expectException(\BadMethodCallException::class);
         $this->settingObj->foBar();
     }
+
+    public function testExtractForView()
+    {
+        $this->settingObj->setShowFirstLastLinks('foBar');
+
+        $extracted = $this->settingObj->extractForView();
+
+        $this->assertArrayHasKey('showFirstLastLinks', $extracted);
+        $this->assertEquals('foBar', $extracted['showFirstLastLinks']);
+    }
 }
