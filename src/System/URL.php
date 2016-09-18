@@ -9,9 +9,14 @@ class URL
      * URL constructor.
      * @param Setting $setting
      * @param int $page Current page
+     * @throws \InvalidArgumentException
      */
     public function __construct(Setting $setting, $page)
     {
+        if (!is_int($page) or $page < 1) {
+            throw new \InvalidArgumentException('Page parameter must be positive integer var!');
+        }
+
         if ($setting->getProperty('use-human-friendly-url')
             and $pattern = $setting->getProperty('user-friendly-pattern')
         ) {
